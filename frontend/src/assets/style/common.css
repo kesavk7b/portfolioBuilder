@@ -1,0 +1,122 @@
+
+.scrollbar-wrapper {
+  scrollbar-width: none;
+  scrollbar-color: rgb(113, 244, 73) transparent;
+}
+
+.scrollbar-wrapper::-webkit-scrollbar {
+  height: 5px;
+}
+
+.scrollbar-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scrollbar-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgb(58, 240, 97);
+  border-radius: 10px;
+}
+
+.item-selection{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top:0;
+  left: 0;
+  z-index: 1;
+}
+
+
+
+
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* Internet Explorer/Edge */
+}
+
+/* .modal-container {
+  position: relative;
+  display: block;
+  top: 0;
+  z-index: 1;
+}
+
+.tool-modal {
+  position: absolute;
+  top: 0;
+} */
+
+.modal-container {
+  position: fixed; /* So it overlays the whole screen */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.tool-modal {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  min-width: 800px;
+  max-width: 90%;
+  height: 60%;
+  text-align: center;
+}
+
+.edit-container{
+  width:100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  min-height: 100px;
+}
+
+.edit-body{
+  position: relative;
+  height: 30px;
+  min-height: 100px;
+}
+.edit-foot{
+  position: relative;
+  display: flex;
+  height: 30px;
+  align-items: center;
+  justify-content: end;
+  background-color: lightgreen;
+  padding: none;
+  margin: none;
+}
+
+.edit-foot>div:nth-child(2){
+  width: 20px;
+  height: 20px;
+}
+.edit-foot>div:nth-child(1){
+  width: 20px;
+  height: 20px;
+}
+
+.test{
+  background-color: lightseagreen;
+}
+
+.panel {
+  max-height: 0;
+  overflow: hidden;
+  background-color: lightblue;
+  transition: max-height 0.4s ease-out, padding 0.4s;
+  padding: 0 10px;
+}
+
+.panel.open {
+  max-height: 100%; /* Or large enough to fit content */
+  padding: 10px;
+}

@@ -1,0 +1,26 @@
+.add-page{
+    all:inset;
+    width: 100%;
+    text-align: center;
+    border:1px solid black;
+    outline: none;
+    /* padding-inline: 10px; */
+    margin: 3px;
+    margin-block: 5px;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.page{
+    text-align: center;
+    padding-inline: 10px;
+    margin-inline: 3px;
+    border-radius: 0.25rem;
+    border:1px solid black;
+    cursor: pointer;
+}
+
+.page-wrapper{
+    display: flex;
+}

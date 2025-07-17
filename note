@@ -1,0 +1,22 @@
+# python -m venv venv
+
+# venv\Scripts\activate
+
+#Find version:
+#  django-admin --version
+
+
+#create project
+# 1. django-admin startproject projectname
+# 2. cd projectname
+# 3. python manage.py startapp myapp
+
+#create super user
+# 1 import app in admin.py file
+# 2.go to cmd -> python manage.py createsuperuser
+# then enter email and set pass word
+
+#################################################################
+# Migration
+# 1.python manage.py makemigrations
+# 2.python manage.py migrate 

@@ -1,0 +1,32 @@
+const data = {
+            navbar:{
+                show:false,
+                component:null,
+                probs:{}
+            },
+            sidebar:{
+                show:false,
+                component:null,
+                probs:{}
+            },
+            sidebar_right:{
+                show:false,
+                component:null,
+                probs:{}
+            },
+            body:{
+                pages:{
+                    pg1:[
+                        {
+                            id:"pg1",
+                            component:'',
+                            class_name:'page',
+                            text:"one",
+                            bg:"",
+                        },
+                        
+                    ],
+                }
+            },
+            footer:{},
+        }

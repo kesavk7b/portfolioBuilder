@@ -1,0 +1,27 @@
+.editor-container{
+    height: 100%;
+}
+.editor-section{
+    height: 100%;
+}
+.editor-tab{
+    background-color: #f8f9fa;
+    height: 86vh;
+    display: flex;
+    justify-content: center;
+}
+.editor-tab-menu{
+    background-color: blue;
+    height: 5vh;
+}
+.editor-tab-menu-item{
+    background-color: rgb(218, 218, 206);
+    width: 25vw;
+}
+
+.screen-view{
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 80vh;
+    margin: 2vh;
+}

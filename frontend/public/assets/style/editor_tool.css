@@ -1,0 +1,5 @@
+.editor-tool{
+    height: 91vh;
+    background-color: lightgray;
+    overflow-y: scroll;
+}

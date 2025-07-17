@@ -1,0 +1,9 @@
+/* body{
+    color:green;
+} */
+
+.page{
+    /* background-color: yellow; */
+    height: 85vh;
+    overflow-y: scroll;
+}
