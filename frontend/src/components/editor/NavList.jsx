@@ -5,16 +5,37 @@ const NavList = () => {
 
     const {portfolio,setPortfolio} = useContext(PortfolioContext)
     const setNav =(component) =>{
-        console.log(portfolio)
+        const comp_name = ""+component.name;
+        console.log("check comm=",comp_name)
         setPortfolio(prev => ({
             ...prev,
             navbar: {
                 ...prev.navbar,
-                component: component,
+                component: comp_name,
+                props: {
+                    navLinks: [ 
+                        {
+                            text: "Home",
+                            id:"l1",
+                            link: "",
+                            page:""
+                        },
+                    ],
+                },
                 show:true
             }
         }));
+
+        console.log("check comm=",portfolio)
     }
+
+    const test = {
+                    home: {
+                        text: "Home",
+                        link: "",
+                        page:""
+                    },
+                }
     return (
         <>
             {Object.entries(navlist).map(([name, Component]) => (

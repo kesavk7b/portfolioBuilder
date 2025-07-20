@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path,include
 from api import urls
 from users import urls as user_urls
+from portfolio import urls as portfolio_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(urls)),
     path('user/',include(user_urls)),
+    path('API/portfolio/',include(portfolio_urls)),
 ]

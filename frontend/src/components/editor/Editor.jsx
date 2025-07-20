@@ -12,6 +12,8 @@ import { ContextMenuProps } from '../../context/ContextMenuProps';
 import { removeNode } from '../../utils/ElementTree';
 
 import ReactDOMServer from "react-dom/server";
+import ContentEditModal from './ContentEditModal';
+import { useLocation } from 'react-router-dom';
 
 const Editor = () => {
 	const [tab, setTab] = useState('lap');
@@ -20,23 +22,30 @@ const Editor = () => {
 	const iframeRef = useRef(null);
 	const [iframeBody, setIframeBody] = useState(null);
 
-	 const {setActiveTree} = useContext(ActiveContext)
-	 const {portfolio,setPortfolio,render} = useContext(PortfolioContext);
+	const {setActiveTree} = useContext(ActiveContext)
+	const {portfolio,setPortfolio,render} = useContext(PortfolioContext);
+
+	const [openEditModal,setOpenModal] = useState(false);
+	const [section,setSection] = useState("body");
 	
 	const  {menu,setMenu} = useContext(ActiveContext);
 
 	const {targetNode} = useContext(ContextMenuProps)
-	
+
+	const data = useLocation().state?.portfolio.data || portfolio;
+	console.log("portfolio data", data);
+	// setPortfolio(data)
 	const options = [
-		{ label: `Duplicate`, onClick: () => alert(JSON.stringify(targetNode)) },
-        { label: `Edit`, onClick: () => editNode(targetNode) },
+		{ label: `Copy`, onClick: () => alert(JSON.stringify(targetNode)) },
+		{ label: `paste`, onClick: () => alert(JSON.stringify(targetNode)) },
+        { label: `Edit`, onClick: () => editNode() },
         { label: `Delete`, onClick: () => deleteNode(targetNode) }, 
         { label: `close`, onClick: () =>onClose() ,icon:""}
 	]
 
-		const onClose = ()=>{
+	const onClose = ()=>{
 		setMenu({...menu,visible:false})
-			setActiveTree([null])
+		setActiveTree([null])
 	}
 
 	const deleteNode = (obj) => {
@@ -70,10 +79,15 @@ const Editor = () => {
 	};
 
 
-	const editNode = (obj)=>{
-
+	const editNode = ()=>{
+		setOpenModal(true);
 	}
 
+	useEffect(() => {
+		if (data) {
+			setPortfolio(data);
+		}	
+	},[data, setPortfolio]);
 	useEffect(() => {
 
 		const iframe = iframeRef.current;
@@ -113,7 +127,7 @@ const Editor = () => {
 		iframe.addEventListener("load", handleLoad);
 		return () => iframe.removeEventListener("load", handleLoad);
 
-	}, [portfolio]);
+	});
 
 	const blankDoc = `
 	<!DOCTYPE html>
@@ -172,7 +186,7 @@ const exportToHtml = () => {
 				/>
 				{iframeBody &&
 					ReactDOM.createPortal(
-						<PortfolioPreview />
+						<PortfolioPreview setSection={setSection} />
 					,
 					iframeBody
 					)}
@@ -183,7 +197,7 @@ const exportToHtml = () => {
 				<Tool />
 			</div>
 			<ContextMenu {...menu} options={options} onClose={onClose} />
-			<button onClick={exportToHtml}>download</button>
+			<ContentEditModal openEditModal={openEditModal} setOpenModal={setOpenModal} section={section} setSection={setSection} />
 		</div>
 	);
 };

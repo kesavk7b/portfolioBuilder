@@ -7,8 +7,10 @@ export const PortfolioProvider = ({children}) =>{
         {
             navbar:{
                 show:false,
-                component:null,
-                probs:{}
+                component:"",
+                probs:{
+                    props:{navLinks:{}}
+                }
             },
             sidebar:{
                 show:false,

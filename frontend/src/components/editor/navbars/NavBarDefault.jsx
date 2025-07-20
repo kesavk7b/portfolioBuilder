@@ -1,20 +1,8 @@
+import { linkError, open_page, scrollToTop } from "../../../utils/Common";
 
-const NavBarDefault = () =>{
-        
-    const test = () =>{
-        console.log("working");
-    }
-    const linkError = ()=>{
-        alert('navlin not linked to any page/card')
-    }
-    const navLinks=[
-        {navlink:"Home",navId:"",navFunc:linkError},
-        {navlink:"Home",navId:"",navFunc:linkError},
-        {navlink:"Home",navId:"",navFunc:linkError},
-        {navlink:"Home",navId:"",navFunc:linkError},
-    ]
+const NavBarDefault = ({navLinks}) =>{
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light flex-column" onClick={test}>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light flex-column">
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">Navbar</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,21 +10,26 @@ const NavBarDefault = () =>{
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                   { navLinks.map((item,i)=>{
-                        return (
-                            <a
+                    {
+                        navLinks && navLinks.map((item, index) => (
+                             (<a 
+                                key={index}
                                 className="nav-link"
-                                key={i}
-                                href="/id"
+                                href="#"
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    item.navFunc();
+                                    if (item.page!=="") {
+                                        open_page(item.page);
+                                    } else if(item.link!==""){
+                                        scrollToTop(item.link);
+                                    }else{
+                                        linkError();
+                                    }
                                 }}
-                            >
-                                {item.navlink}
-                            </a>
-                        );
-                    })}
+                            >{item.text}</a>)
+                        )
+                        )
+                    }
                 </div>
                 </div>
             </div>

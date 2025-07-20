@@ -6,7 +6,9 @@ import RenderTree from "./RenderTree";
 import { ActiveContext } from "../../context/ActiveElementContext";
 import { ContextMenuProps } from '../../context/ContextMenuProps';
 
-const PortfolioPreview = () =>{
+import * as Navbars from './navbars';
+
+const PortfolioPreview = ({setSection}) =>{
     const {setElementId,setMenu} = useContext(ActiveContext)
     const {portfolio} = useContext(PortfolioContext);
     const  {setTargetNode} = useContext(ContextMenuProps);
@@ -18,6 +20,7 @@ const PortfolioPreview = () =>{
         e.preventDefault()
         setElementId(obj.id)
         setTargetNode(obj);
+        setSection("navbar");
         setMenu({
             x:e.pageX,
             y:e.pageY,
@@ -27,6 +30,7 @@ const PortfolioPreview = () =>{
 
     let height = "85vh";
     if(!portfolioData?.navbar?.show) height="95vh"
+    const Nav = Navbars[portfolioData.navbar.component];
     return (
         <>
             {portfolioData?.navbar?.show &&
@@ -60,17 +64,11 @@ const PortfolioPreview = () =>{
                                     overlayRef.current.style.pointerEvents = "auto";
                                 }
                                 }, 5000);
-                                if (clickedElem === overlayRef.current) {
-                                    console.log("Overlay clicked!");
-                                    // You can add a custom left-click action here
-                                } else {
-                                    // Pass-through left click to underlying element
-                                }
                             }
                         }}
                     >
                     </div>
-                    <portfolioData.navbar.component />
+                    <Nav {...portfolioData.navbar.props} />
                 </React.Fragment>
             )
             }

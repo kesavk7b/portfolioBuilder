@@ -32,7 +32,7 @@ const WebPageChildTree = ({data,type="Page"})=>{
                     return (
                         <React.Fragment key={item.id || idx}>
                             <div 
-                                className="page" 
+                                className="tool-page" 
                                 style={{border:elementId===item.id? "2px solid red":""}} 
                                 onClick={() => extendPage(item.id)}
                                 onContextMenu={(e)=>handleRightclick(e,item)} 

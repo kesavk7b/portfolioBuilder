@@ -97,7 +97,7 @@ const WebPageTree = () => {
                         return(
                             <React.Fragment key={idx}>
                                 <div 
-                                    className="page" 
+                                    className="tool-page" 
                                     onClick={() => extendPage(item)} 
                                     onContextMenu={(e)=>handleRightclick(e,item)} 
                                 >Page 
