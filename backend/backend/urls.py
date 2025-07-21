@@ -19,10 +19,19 @@ from django.urls import path,include
 from api import urls
 from users import urls as user_urls
 from portfolio import urls as portfolio_urls
+from backend.view import Test
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(urls)),
     path('user/',include(user_urls)),
     path('API/portfolio/',include(portfolio_urls)),
+    path('test/', Test.as_view({'get': 'list'}), name='test-endpoint'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

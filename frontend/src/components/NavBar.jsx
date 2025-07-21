@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate ,Link} from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 const NavBar = () =>{
@@ -11,6 +11,48 @@ const NavBar = () =>{
         setAuthToken(null);
         navigate('/login',{state:{type:"log"}})
     }
+
+    useEffect(() => {
+        const token = localStorage.getItem("access");
+        if (token) {
+            setLogin(true);
+            setAuthToken(token);
+        } else {
+            setLogin(false);
+            setAuthToken(null);
+        }
+    }, []);
+
+    // function openFullscreen() {
+    //     const elem = document.documentElement;
+    //     if (elem.requestFullscreen) {
+    //     elem.requestFullscreen();
+    //     } else if (elem.webkitRequestFullscreen) { // Safari
+    //     elem.webkitRequestFullscreen();
+    //     } else if (elem.msRequestFullscreen) { // IE11
+    //     elem.msRequestFullscreen();
+    //     }
+    // }
+
+    // function closeFullscreen() {
+    //     if (document.exitFullscreen) {
+    //         document.exitFullscreen();
+    //     } else if (document.webkitExitFullscreen) { /* Safari */
+    //         document.webkitExitFullscreen();
+    //     } else if (document.msExitFullscreen) { /* IE11 */
+    //         document.msExitFullscreen();
+    //     }
+    // }
+    // const [toggleFullScreen, setToggleFullScreen] = useState(false);  
+    // const setScreen = () =>{
+    //     if (toggleFullScreen) {
+    //         closeFullscreen();
+    //     } else {
+    //         openFullscreen();
+    //     }
+    //     setToggleFullScreen(!toggleFullScreen);
+
+    // }
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -49,6 +91,7 @@ const NavBar = () =>{
                                     <a className="nav-link" href="test">test</a>
                                 </li>
                             </ul>
+                            {/* <button className="btn btn-outline-primary" onClick={setScreen}>test</button> */}
                             <button className="btn btn-outline-danger" onClick={logout}>Logout</button>
                         </>
                     )

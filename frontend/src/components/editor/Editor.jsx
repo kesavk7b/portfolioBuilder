@@ -33,8 +33,7 @@ const Editor = () => {
 	const {targetNode} = useContext(ContextMenuProps)
 
 	const data = useLocation().state?.portfolio.data || portfolio;
-	console.log("portfolio data", data);
-	// setPortfolio(data)
+	const id = useLocation().state?.portfolio.id || portfolio.id;
 	const options = [
 		{ label: `Copy`, onClick: () => alert(JSON.stringify(targetNode)) },
 		{ label: `paste`, onClick: () => alert(JSON.stringify(targetNode)) },
@@ -194,7 +193,7 @@ const exportToHtml = () => {
 			</div>
 
 			<div className="editor-tool col-lg-3">
-				<Tool />
+				<Tool id={id} userid={0} />
 			</div>
 			<ContextMenu {...menu} options={options} onClose={onClose} />
 			<ContentEditModal openEditModal={openEditModal} setOpenModal={setOpenModal} section={section} setSection={setSection} />

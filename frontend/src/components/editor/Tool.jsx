@@ -14,7 +14,7 @@ import Text from "./Text";
 import axios from "axios";
 import { data } from "react-router-dom";
 
-const Tool = () =>{
+const Tool = ({id,userid=0}) =>{
     const {elementId} = useContext(ActiveContext)
     const {portfolio} = useContext(PortfolioContext);
     const list = [
@@ -62,10 +62,20 @@ const Tool = () =>{
                 alert('Error saving portfolio:', error);
             });
     }
+
+    const update_portfolio = () =>{
+        const portfolioData = {
+            data:portfolio,
+            title:"My Portfolio",
+            description:"This is my portfolio",
+        }
+        axios.put(`http://localhost:8000/API/portfolio/portfolios/${id}/`, portfolioData)
+    }
     return (
         <>
             <h3>tool</h3>
-            <button className="btn btn-primary" onClick={save_portfolio}>portfolio</button>
+            <button className="btn btn-primary m-1" onClick={save_portfolio}>portfolio</button>
+            <button className="btn btn-primary m-1" onClick={update_portfolio}>update</button>
             <div className="edit-container">
                 <div className="edit-body">
                     

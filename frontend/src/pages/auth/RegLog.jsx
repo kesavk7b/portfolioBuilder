@@ -3,6 +3,7 @@ import '../../assets/style/auth.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
+import {jwtDecode} from 'jwt-decode';
 const RegLog = () =>{
     const location = useLocation();
     const type = location.state?.type || "reg";
@@ -31,7 +32,30 @@ const RegLog = () =>{
             setLogin(true);
             navigate("/"); 
         })
+
+        // scheduleAutoLogout();
     }
+
+    // const logout = () =>{
+    //     localStorage.removeItem("access");
+    //     localStorage.removeItem("refresh");
+    //     setLogin(false);
+    //     setAuthToken(null);
+    //     navigate('/login',{state:{type:"log"}})
+    // }
+
+    // const scheduleAutoLogout = () => {
+    //     const token = localStorage.getItem("access");
+    //     if (token) {
+    //         const decoded = jwtDecode(token);
+    //         const now = Date.now() / 1000;
+    //         const delay = (decoded.exp - now) * 1000; // milliseconds
+
+    //         setTimeout(() => {
+    //             logout();
+    //         }, delay);
+    //     }
+    // };
     return (
         <div className='d-flex' style={{height:"100%",backgroundColor:"white",alignItems:"center",justifyContent:"center"}}>
             <div className='card p-3' style={{backgroundColor:"grey",textAlign:"center",width:"20rem"}}>

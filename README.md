@@ -12,4 +12,5 @@ python packages:
 node packages:
     1. axios
     2.npm install react-dom
-    3.fontawsome
+    3.fontawsome (solid,regular)
+    4.jwt-decode

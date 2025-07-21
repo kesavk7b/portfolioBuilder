@@ -26,7 +26,6 @@ class User_portfolio(models.Model):
     
 class Saved_like(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    saved = models.ForeignKey(Portfolio,on_delete=models.CASCADE)
     liked = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name='liked_by')
     created_at = models.DateTimeField(auto_now_add=True)    
     updated_at = models.DateTimeField(auto_now=True) 
