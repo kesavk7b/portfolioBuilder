@@ -61,15 +61,16 @@
   z-index: 1000;
 }
 
-.tool-modal {
-  background-color: white;
-  padding: 2rem;
+.tool-container {
+  position: absolute;
+  background-color: transparent;
+  padding: 5px;
   border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); */
   min-width: 800px;
   max-width: 90%;
-  height: 60%;
-  text-align: center;
+  height: auto;
+  transform: translate(-50%, -50%);
 }
 
 .edit-container{
@@ -119,4 +120,17 @@
 .panel.open {
   max-height: 100%; /* Or large enough to fit content */
   padding: 10px;
+}
+
+.drag-btn{
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    box-shadow: 0 0 10px;
+    margin: 10px;
 }

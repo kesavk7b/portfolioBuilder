@@ -1,0 +1,50 @@
+:root {
+  /* Backgrounds */
+  --color-bg: #FFFFFF;        /* Main background */
+  --color-surface: #F9FAFB;   /* Cards / Navbar / Panels */
+  --color-border: #E5E7EB;    /* Divider lines */
+
+  /* Text */
+  --color-text-primary: #111827;   /* Main text */
+  --color-text-secondary: #4B5563; /* Muted text */
+
+  /* Accents */
+  --color-accent: #2563EB;    /* Blue highlight */
+  --color-accent-hover: #1D4ED8;
+  --color-danger: #DC2626;    /* Red */
+  --color-success: #16A34A;   /* Green */
+
+  /* Buttons */
+  --color-btn-bg: #2563EB;
+  --color-btn-text: #FFFFFF;
+  --color-btn-hover: #1D4ED8;
+
+  --theme: rgb(46, 251, 46);
+  --theme-hover: rgb(26, 200, 26);
+}
+
+
+[data-theme='dark'] {
+  /* Backgrounds */
+  --color-bg: #0D0D0D;        /* Main background */
+  --color-surface: #1A1A1A;   /* Cards / Navbar / Panels */
+  --color-border: #2E2E2E;    /* Divider lines */
+
+  /* Text */
+  --color-text-primary: #F5F5F5;  /* Main text */
+  --color-text-secondary: #A3A3A3; /* Muted text */
+
+  /* Accents */
+  --color-accent: #2563EB;    /* Blue highlight */
+  --color-accent-hover: #3B82F6;
+  --color-danger: #E11D48;    /* Rose/red */
+  --color-success: #22C55E;   /* Green */
+
+  /* Buttons */
+  --color-btn-bg: #2563EB;
+  --color-btn-text: #FFFFFF;
+  --color-btn-hover: #1D4ED8;
+
+  --theme: rgb(46, 251, 46);
+  --theme-hover: rgb(26, 200, 26);
+}

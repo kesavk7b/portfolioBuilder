@@ -1,9 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate ,Link} from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 const NavBar = () =>{
     const navigate = useNavigate();
-    const {isLogged,setAuthToken,setLogin} = useContext(AuthContext)
+    const {isLogged,setAuthToken,setLogin,theme,setTheme} = useContext(AuthContext)
+    const set_color_theme = (theme) =>{
+        localStorage.setItem('theme',theme);
+        setTheme(theme);
+        console.log(theme)
+    }
     const logout = () =>{
         localStorage.removeItem("access");
         localStorage.removeItem("refresh");
@@ -54,50 +59,55 @@ const NavBar = () =>{
 
     // }
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="/">Portfolio</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarScroll">
-                    
-                    {!isLogged?(
-                        <>
-                            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{"--bs-scroll-height":"100px;"}}>
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="/">Home</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="about">about</a>
-                                </li>
-                            </ul>
-                            <button className="btn btn-outline-success" type="submit" onClick={() => navigate('/register',{state:{type:"reg"}})}>sign-ups</button>
-                            <button className="btn btn-outline-success" type="submit" onClick={() => navigate('/login',{state:{type:"log"}})}>logins</button>
-                        </>
-                    ):(
-                        <>
-                            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{"--bs-scroll-height":"100px;"}}>
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="/">Home</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="about">about</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="editor">Editor</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="test">test</a>
-                                </li>
-                            </ul>
-                            {/* <button className="btn btn-outline-primary" onClick={setScreen}>test</button> */}
-                            <button className="btn btn-outline-danger" onClick={logout}>Logout</button>
-                        </>
-                    )
+        <nav className="bg-[var(--color-surface)] text-[var(--color-text-primary)] px-6 py-1 flex w-full">
+            <div className="text-xl font-bold mb-2 md:mb-0">WebBuilder</div>
+            <div className="flex justify-between items-center w-full">
+                <ul className="hidden md:flex gap-6 text-lg">
+                    <li className="hover:text-gray-200 cursor-pointer">
+                        <a href="/">Home</a>
+                    </li>
+                    <li className="hover:text-gray-200 cursor-pointer">
+                        <a href="/editor">Editor</a>
+                    </li>
+                    <li className="hover:text-gray-200 cursor-pointer">
+                        <a href="/bookmark">Bookmark</a>
+                    </li>
+                    <li className="hover:text-gray-200 cursor-pointer">
+                        <a href="/component">Component</a>
+                    </li>
+                </ul>
+                <ul className="hidden md:flex gap-6 text-lg flex">
+                    {theme === 'dark' && (
+                        <button onClick={() => set_color_theme('primary')}>Switch to Primary</button>
+                    )}
+                    {theme === 'primary' && (
+                        <button onClick={() => set_color_theme('dark')}>Switch to Dark</button>
+                    )}
 
+                    {isLogged?
+                        (<button onClick={logout} className="bg-white text-green-600 px-4 py-2 rounded-lg hover:bg-gray-100">
+                            logout
+                        </button>):
+                        (
+                            <React.Fragment>
+                                <button 
+                                    className="bg-white text-green-600 px-4 py-2 rounded-lg hover:bg-gray-100" 
+                                    type="submit" 
+                                    onClick={() => navigate('/register',{state:{type:"reg"}})}
+                                >
+                                    sign-ups
+                                </button>
+                                <button 
+                                    className="bg-white text-green-600 px-4 py-2 rounded-lg hover:bg-gray-100" 
+                                    type="submit" onClick={() => navigate('/login',{state:{type:"log"}})}
+                                >
+                                    login
+                                </button>
+                            </React.Fragment>
+                        )
                     }
-                </div>
+                </ul>
+
             </div>
         </nav>
     )

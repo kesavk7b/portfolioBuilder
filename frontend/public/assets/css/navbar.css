@@ -1,0 +1,31 @@
+.kb-navbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.kb-navbar>div{
+    display: flex;
+}
+.kb-navbar>div.left-section>a{
+    margin-block: auto;
+    padding-left: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.kb-navbar>div>ul{
+    list-style: none;
+    padding: 1px;
+    display: block;
+}
+
+.kb-navbar>div>ul>li>a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.kb-navbar > div > ul > li {
+  display: inline;
+  padding-inline: 10px;
+}
+

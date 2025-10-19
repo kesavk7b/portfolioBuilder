@@ -1,18 +1,16 @@
-// import { NavBarDefault } from "./navbars";
-// import { NavBarTest } from "./navbars";
 import { PortfolioContext } from '../../context/PortfolioContext';
-import React, { useContext, useRef } from "react";
+import { useContext } from "react";
 import RenderTree from "./RenderTree";
 import { ActiveContext } from "../../context/ActiveElementContext";
 import { ContextMenuProps } from '../../context/ContextMenuProps';
+import { handleDragOver, handleDrop } from '../../utils/DragAndDrop';
+import NodeTree from '../NodeTree';
 
-import * as Navbars from './navbars';
 
 const PortfolioPreview = ({setSection}) =>{
     const {setElementId,setMenu} = useContext(ActiveContext)
-    const {portfolio} = useContext(PortfolioContext);
+    const {portfolio,setPortfolio,activePage} = useContext(PortfolioContext);
     const  {setTargetNode} = useContext(ContextMenuProps);
-    const overlayRef = useRef();
     
      if (!portfolio) return <div>Loading...</div>;
     const portfolioData = portfolio;
@@ -28,73 +26,30 @@ const PortfolioPreview = ({setSection}) =>{
         })
     }
 
-    let height = "85vh";
-    if(!portfolioData?.navbar?.show) height="95vh"
-    const Nav = Navbars[portfolioData.navbar.component];
+
+    // const Nav = Navbars[portfolioData.navbar.component];
+    console.log("test==================================",portfolio,activePage);
     return (
-        <>
-            {portfolioData?.navbar?.show &&
-            (
-                <React.Fragment>
-                    <div 
-                        ref={overlayRef}
-                        style={{
-                            position:"absolute",
-                            height:"50px",
-                            width:"100%",
-                            top:0,
-                            left:0,
-                            zIndex:10,
-                            background:"transparent",
-                            pointerEvents:"auto"
-                        }} 
-                        onContextMenu={(e)=>handleRightclick(e,portfolioData?.navbar)}
-                        onMouseDown={(e) => {
-                            e.preventDefault();
-                            if (!overlayRef.current) return;
-                            if(e.button===0){
-
-                                const clickedElem = document.elementFromPoint(e.clientX, e.clientY);
-
-                                // Check if the clicked element is the overlay itself
-                                overlayRef.current.style.pointerEvents = "none";
-
-                                setTimeout(() => {
-                                if (overlayRef.current) {
-                                    overlayRef.current.style.pointerEvents = "auto";
-                                }
-                                }, 5000);
-                            }
-                        }}
-                    >
-                    </div>
-                    <Nav {...portfolioData.navbar.props} />
-                </React.Fragment>
-            )
-            }
-            <div style={{ display: "flex", width: "100%" }}>
-                {portfolioData?.sidebar?.show &&
-                    (
-                        <div style={{ width: "150px", background: "lightblue"}}>Left</div>
-                    )
+           <div
+                className='bg-black-500'
+                style={{ transform: `scale(1)`, transformOrigin: "0 0",height:"100vh"}}
+                onDrop={(e)=>handleDrop(e,portfolio,setPortfolio,"",activePage)}
+                onDragOver={handleDragOver}
+            >    
+                {
+                    !portfolio[activePage].length && <span className="text-[var(--color-text-secondary)]">Drag and create</span>
                 }
-                
-                <div  style={{ flex: 1, background: "lightgreen" ,  height:height,overflowY:"hidden"}} onClick={()=>setElementId(null)} >
-                    {portfolioData?.body?.pages &&
-                        Object.values(portfolioData.body.pages).map((item,i)=>{
-                            return (<RenderTree key={i} data={item} height={height} />)
-                        })
-                    }
-                </div>
+                {
 
-                {portfolioData?.sidebar_right?.show &&
-                    (
-                        <div style={{ width: "100px", background: "lightcoral" }}>Right</div>
+                    portfolio[activePage].length!==0 && (
+                        <div className="w-full h-full block">
+                            <NodeTree data={portfolio} childData={portfolio[activePage]} setData={setPortfolio} activePage={activePage} />
+                        </div>
                     )
-                }
+                }   
             </div>
-            <div style={{background:"green"}}>footer</div>
-        </>
+        
+        
     )
 }
 

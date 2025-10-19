@@ -1,0 +1,34 @@
+.component-card{
+    width:200px;
+    height:250px;
+    border-radius: 5px;
+    margin: 5px;
+    text-align: center;
+    text-justify: center;
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.2); /* added rgba for smoother shadow */
+    display: flex;           /* allows proper centering of content */
+    justify-content: center; /* horizontally centers child elements */
+    align-items: center;
+}
+
+.editor-layout-tool-container{
+    background-color: green;
+}
+.editor-layout-tool{
+    list-style: none;
+    background-color: white;
+    box-shadow: 0 0 5px 1px;
+    padding: 1px!important;
+    display: none;
+    position: relative;
+    border-radius: 10px;
+}
+
+.editor-layout-tool>li{
+    display: inline-block;
+    padding: 5px;
+    cursor: pointer;
+}
+.editor-layout-tool-container:hover > .editor-layout-tool{
+    display: block;
+}
