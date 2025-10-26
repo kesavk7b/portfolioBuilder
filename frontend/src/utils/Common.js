@@ -57,7 +57,6 @@ const update_rec = (data, targetId, parent_id, id_arr, newStyle,activePage=undef
         return newData;
     }
 
-    console.log(data,"dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     if (!data || data.length === 0) return [...data];
     const [first, ...remain] = data;
 

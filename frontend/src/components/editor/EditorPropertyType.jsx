@@ -8,9 +8,12 @@ const EditorPropertyType = ()=>{
         setProperty(selected?.[0]?.style?.display);
     })
     return (
-        <React.Fragment>
+        <div className="p-3">
             <div className="text-white">{property} Property</div>
-        </React.Fragment>
+            {
+
+            }
+        </div>
     )
 }
 export default EditorPropertyType;
