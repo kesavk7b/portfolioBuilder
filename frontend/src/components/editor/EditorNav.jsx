@@ -15,7 +15,7 @@ const EditorNav = ({tab,setTab})=>{
                 {
                     portfolio.map((page,index)=>{
                         return (
-                            <button className={(activePage==index)?active_class:"rounded-md px-3 py-1 text-sm font-medium text-gray-400 hover:bg-gray-700 hover:text-white"} onClick={()=>setActivePage(index)}>page {index+1}</button>
+                            <button key={index} className={(activePage==index)?active_class:"rounded-md px-3 py-1 text-sm font-medium text-gray-400 hover:bg-gray-700 hover:text-white"} onClick={()=>setActivePage(index)}>page {index+1}</button>
                         )
                     })
                 }

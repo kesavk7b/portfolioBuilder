@@ -3,12 +3,13 @@ import { PortfolioContext } from "../../context/PortfolioContext";
 import PortfolioPreview from "./PortfolioPreview";
 import ReactDOM from 'react-dom';
 import { handleDragOver, handleDrop } from "../../utils/DragAndDrop";
+import { useIframeRef } from "../../context/CommonToAll";
 
 
 const EditorFrame = ({setSection,tab})=>{
         const screenSize = tab === 'mob' ? '375px' : tab === 'tab' ? '768px' : '97%';
     
-        const iframeRef = useRef(null);
+        const iframeRef = useIframeRef();
         const [iframeBody, setIframeBody] = useState(null);
     
         const {render} = useContext(PortfolioContext);

@@ -28,7 +28,6 @@ const PortfolioPreview = ({setSection}) =>{
 
 
     // const Nav = Navbars[portfolioData.navbar.component];
-    console.log("test==================================",portfolio,activePage);
     return (
            <div
                 className='bg-black-500'

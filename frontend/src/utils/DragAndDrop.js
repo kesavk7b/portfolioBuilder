@@ -35,13 +35,6 @@ export const handleDrop = (e,data,setData,id="",activePage) => {
   element_data = JSON.parse(element_data);
   if(data.length===0) drop_position=0
   const id_arr = id.split('-')
-  console.log("drop elem iddddddddddddddddddd",id,drop_position,id_arr,drop_position && data.length!==0)
-  let len = data.length;
-  if(activePage!==undefined) len = data[activePage].length
-  if(drop_position && data.length!==0) {
-    id_arr.pop();
-    id = id_arr.join();
-  }
   setData(updateData(element_data,data,id,id_arr,id_arr[0],activePage));
   if (element_data) {
     alert(`Dropped: ${element_data}`);
@@ -83,9 +76,7 @@ export const handleDragOver = (e) => {
 };
 
 const updateData = (element_data, data, targetId, id_arr, parent_id,activePage, index = 0) => {
-  console.log(data,"====================",element_data,targetId,parent_id,id_arr)
-   if (activePage !== undefined) {
-    console.log("is it working")
+  if (activePage !== undefined) {
     // Call the same function for the selected page only
     const updatedPage = updateData(
       element_data,
@@ -103,8 +94,8 @@ const updateData = (element_data, data, targetId, id_arr, parent_id,activePage, 
     return newData;
   }
 	if (!data || data.length === 0 || targetId==="") {
-      element_data.id = find_max_id(data || [],targetId)
-      return [...data,element_data];
+    element_data.id = find_max_id(data || [],targetId)
+    return [...data,element_data];
   }
 
 	const [first, ...rest] = data;
@@ -112,7 +103,7 @@ const updateData = (element_data, data, targetId, id_arr, parent_id,activePage, 
 	if (first.id === parent_id) {
 		if (targetId === first.id) {
 		// found the target, add element_data to its children
-			 let id = "c0";
+			let id = "c0";
       element_data.id = find_max_id(first.children || [],targetId)
 
 			return [
@@ -156,72 +147,4 @@ const find_max_id = (data,parent_id="") =>{
   return  result.join('-');
 }
 
-const updateData2 = (
-  element_data,
-  data,
-  targetId,
-  id_arr,
-  parent_id,
-  activePage,
-  index = 0
-) => {
-  // ✅ Handle case 2: multiple page trees
-  const isMultiPage = Array.isArray(data[0]);
-
-  // Work on the specific page data
-  let currentPageData = isMultiPage
-    ? [...(data[activePage] || [])]
-    : [...(data || [])];
-
-  // ✅ Base condition (empty page or root)
-  if (!currentPageData || currentPageData.length === 0 || targetId === "") {
-    element_data.id = find_max_id(currentPageData || [], targetId);
-    const updated = [...currentPageData, element_data];
-
-    // merge back if multi-page
-    if (isMultiPage) {
-      const result = [...data];
-      result[activePage] = updated;
-      return result;
-    }
-    return updated;
-  }
-
-  // ✅ Recursive helper for one tree level
-  const recurse = (dataArr, parent_id, index) => {
-    const [first, ...rest] = dataArr;
-    if (!first) return dataArr;
-
-    if (first.id === parent_id) {
-      if (targetId === first.id) {
-        element_data.id = find_max_id(first.children || [], targetId);
-        return [
-          { ...first, children: [...(first.children || []), element_data] },
-          ...rest,
-        ];
-      }
-
-      const nextParentId = parent_id + "-" + id_arr[index + 1];
-      const newChildren = recurse(
-        first.children || [],
-        nextParentId,
-        index + 1
-      );
-      return [{ ...first, children: newChildren }, ...rest];
-    }
-
-    return [first, ...recurse(rest, parent_id, index)];
-  };
-
-  const updatedTree = recurse(currentPageData, parent_id, index);
-
-  // ✅ Merge back into original structure
-  if (isMultiPage) {
-    const result = [...data];
-    result[activePage] = updatedTree;
-    return result;
-  }
-
-  return updatedTree;
-};
 
